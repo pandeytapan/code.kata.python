@@ -21,7 +21,7 @@ class TeeTests(unittest.TestCase):
     def test_one_line(self):
         with patch_stdin("hello\n"):
             output = run_program('.\\tee\\010.py')
-            self.assertEqual(output, "hello\n")
+            self.assertEqual(output.replace(os.linesep, '\n'), "hello\n")
 
     # def test_four_lines(self):
     #     text = "Line 1\nLine 2\nLine 3\n"
