@@ -8,102 +8,102 @@ from tempfile import NamedTemporaryFile
 import unittest
 import warnings
 
-
+test_file = '.\\tee\\bonus2_050.py'
 class TeeTests(unittest.TestCase):
 
     """Tests for tee.py"""
 
     def test_no_input(self):
         with patch_stdin(""):
-            output = run_program('.\\tee\\010.py')
+            output = run_program(test_file)
             self.assertEqual(output, "")
 
     def test_one_line(self):
         with patch_stdin("hello\n"):
-            output = run_program('.\\tee\\010.py')
+            output = run_program(test_file)
             self.assertEqual(output.replace(os.linesep, '\n'), "hello\n")
 
-    # def test_four_lines(self):
-    #     text = "Line 1\nLine 2\nLine 3\n"
-    #     with patch_stdin(text):
-    #         output = run_program('tee.py')
-    #         self.assertEqual(output, text)
+    def test_four_lines(self):
+        text = "Line 1\nLine 2\nLine 3\n"
+        with patch_stdin(text):
+            output = run_program(test_file)
+            self.assertEqual(output.replace(os.linesep, '\n'), text)
 
-    # def test_no_line_ending(self):
-    #     with patch_stdin("hello"):
-    #         output = run_program('tee.py')
-    #         self.assertEqual(output, "hello")
+    def test_no_line_ending(self):
+        with patch_stdin("hello"):
+            output = run_program(test_file)
+            self.assertEqual(output, "hello")
 
-    # def test_pipe_to_one_file(self):
-    #     text = "This is a file\nWith multiple lines in it\n\nThe end."
-    #     with make_file() as filename:
-    #         with patch_stdin(text):
-    #             output = run_program('tee.py', [filename])
-    #         self.assertEqual(output, text)
-    #         self.assertEqual(Path(filename).read_text(), text)
+    def test_pipe_to_one_file(self):
+        text = "This is a file\nWith multiple lines in it\n\nThe end."
+        with make_file() as filename:
+            with patch_stdin(text):
+                output = run_program(test_file, [filename])
+            self.assertEqual(output.replace(os.linesep, '\n'), text)
+            self.assertEqual(Path(filename).read_text().replace(os.linesep, '\n'), text)
 
-    # def test_pipe_to_file_twice(self):
-    #     text1 = "This is a file\n"
-    #     text2 = "This is the second write\n"
-    #     with make_file() as filename:
-    #         with patch_stdin(text1):
-    #             output1 = run_program('tee.py', [filename])
-    #         self.assertEqual(output1, text1)
-    #         self.assertEqual(Path(filename).read_text(), text1)
-    #         with patch_stdin(text2):
-    #             output2 = run_program('tee.py', [filename])
-    #         self.assertEqual(output2, text2)
-    #         self.assertEqual(Path(filename).read_text(), text2)
+    def test_pipe_to_file_twice(self):
+        text1 = "This is a file\n"
+        text2 = "This is the second write\n"
+        with make_file() as filename:
+            with patch_stdin(text1):
+                output1 = run_program(test_file, [filename])
+            self.assertEqual(output1.replace(os.linesep, '\n'), text1)
+            self.assertEqual(Path(filename).read_text().replace(os.linesep, '\n'), text1)
+            with patch_stdin(text2):
+                output2 = run_program(test_file, [filename])
+            self.assertEqual(output2.replace(os.linesep, '\n'), text2)
+            self.assertEqual(Path(filename).read_text().replace(os.linesep, '\n'), text2)
 
-    # def test_pipe_to_nonexistant_file(self):
-    #     text = "This is a file\nWith multiple lines in it\n\nThe end."
-    #     with make_file() as filename:
-    #         Path(filename).unlink()
-    #         with patch_stdin(text):
-    #             output = run_program('tee.py', [filename])
-    #         self.assertEqual(output, text)
-    #         self.assertEqual(Path(filename).read_text(), text)
+    def test_pipe_to_nonexistant_file(self):
+        text = "This is a file\nWith multiple lines in it\n\nThe end."
+        with make_file() as filename:
+            Path(filename).unlink()
+            with patch_stdin(text):
+                output = run_program(test_file, [filename])
+            self.assertEqual(output.replace(os.linesep, '\n'), text)
+            self.assertEqual(Path(filename).read_text().replace(os.linesep, '\n'), text)
 
-    # # To test the Bonus part of this exercise, comment out the following line
-    # @unittest.expectedFailure
-    # def test_pipe_to_many_files(self):
-    #     text = "This is a file\nWith multiple lines in it\n\nThe end."
-    #     with make_file() as file1, make_file() as file2, make_file() as file3:
-    #         with patch_stdin(text):
-    #             output = run_program('tee.py', [file1, file2, file3])
-    #         self.assertEqual(output, text)
-    #         self.assertEqual(Path(file1).read_text(), text)
-    #         self.assertEqual(Path(file2).read_text(), text)
-    #         self.assertEqual(Path(file3).read_text(), text)
+    # To test the Bonus part of this exercise, comment out the following line
+    @unittest.expectedFailure
+    def test_pipe_to_many_files(self):
+        text = "This is a file\nWith multiple lines in it\n\nThe end."
+        with make_file() as file1, make_file() as file2, make_file() as file3:
+            with patch_stdin(text):
+                output = run_program(test_file, [file1, file2, file3])
+            self.assertEqual(output.replace(os.linesep, '\n'), text)
+            self.assertEqual(Path(file1).read_text().replace(os.linesep, '\n'), text)
+            self.assertEqual(Path(file2).read_text().replace(os.linesep, '\n'), text)
+            self.assertEqual(Path(file3).read_text().replace(os.linesep, '\n'), text)
 
-    # # To test the Bonus part of this exercise, comment out the following line
-    # @unittest.expectedFailure
-    # def test_binary_input_and_output(self):
-    #     binary_data = bytes(range(256))
-    #     with make_file() as filename:
-    #         with patch_stdin(binary_data):
-    #             output = run_program('tee.py', [filename], raw_output=True)
-    #         self.assertEqual(output, binary_data)
-    #         self.assertEqual(Path(filename).read_bytes(), binary_data)
+    # To test the Bonus part of this exercise, comment out the following line
+    @unittest.expectedFailure
+    def test_binary_input_and_output(self):
+        binary_data = bytes(range(256))
+        with make_file() as filename:
+            with patch_stdin(binary_data):
+                output = run_program(test_file, [filename], raw_output=True)
+            self.assertEqual(output, binary_data)
+            self.assertEqual(Path(filename).read_bytes(), binary_data)
 
-    # # To test the Bonus part of this exercise, comment out the following line
-    # @unittest.expectedFailure
-    # def test_append_attribute(self):
-    #     run1_text = "Write this to a file\nAnd this line also"
-    #     run2_text = ".\nThis would be the third line\nAnd this the fourth"
-    #     with make_file() as file1, make_file() as file2, make_file() as file3:
-    #         with patch_stdin(run1_text):
-    #             out1 = run_program('tee.py', ['-a', file1, file2, file3])
-    #         self.assertEqual(out1, run1_text)
-    #         self.assertEqual(Path(file1).read_text(), run1_text)
-    #         self.assertEqual(Path(file2).read_text(), run1_text)
-    #         self.assertEqual(Path(file3).read_text(), run1_text)
-    #         with patch_stdin(run2_text):
-    #             out2 = run_program('tee.py', [file1, file2, file3, '--append'])
-    #         self.assertEqual(out2, run2_text)
-    #         self.assertEqual(Path(file1).read_text(), run1_text + run2_text)
-    #         self.assertEqual(Path(file2).read_text(), run1_text + run2_text)
-    #         self.assertEqual(Path(file3).read_text(), run1_text + run2_text)
+    # To test the Bonus part of this exercise, comment out the following line
+    @unittest.expectedFailure
+    def test_append_attribute(self):
+        run1_text = "Write this to a file\nAnd this line also"
+        run2_text = ".\nThis would be the third line\nAnd this the fourth"
+        with make_file() as file1, make_file() as file2, make_file() as file3:
+            with patch_stdin(run1_text):
+                out1 = run_program(test_file, ['-a', file1, file2, file3])
+            self.assertEqual(out1.replace(os.linesep, '\n'), run1_text)
+            self.assertEqual(Path(file1).read_text().replace(os.linesep, '\n'), run1_text)
+            self.assertEqual(Path(file2).read_text().replace(os.linesep, '\n'), run1_text)
+            self.assertEqual(Path(file3).read_text().replace(os.linesep, '\n'), run1_text)
+            with patch_stdin(run2_text):
+                out2 = run_program(test_file, [file1, file2, file3, '--append'])
+            self.assertEqual(out2.replace(os.linesep, '\n'), run2_text)
+            self.assertEqual(Path(file1).read_text().replace(os.linesep, '\n'), run1_text + run2_text)
+            self.assertEqual(Path(file2).read_text().replace(os.linesep, '\n'), run1_text + run2_text)
+            self.assertEqual(Path(file3).read_text().replace(os.linesep, '\n'), run1_text + run2_text)
 
 
 class DummyException(Exception):
