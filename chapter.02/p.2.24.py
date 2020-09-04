@@ -1,6 +1,4 @@
 from ezgraphics import GraphicsWindow
-from ezgraphics import GraphicsCanvas
-
 
 win = GraphicsWindow()
 canvas = win.canvas()
