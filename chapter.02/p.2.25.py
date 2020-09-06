@@ -3,10 +3,13 @@ from ezgraphics import GraphicsWindow
 win = GraphicsWindow()
 
 canvas = win.canvas()
+width = canvas.width()
+height = canvas.height()
 
-canvas.drawOval(canvas.width() // 4, canvas.height() // 4, canvas.width() // 2, canvas.height() // 2)
-canvas.drawOval(canvas.width() // 4 + canvas.width() // 8, canvas.height() // 4 + canvas.height() // 8, canvas.width() // 16, canvas.height() // 16)
-canvas.drawOval(canvas.width() // 2 + canvas.width() // 16, canvas.height() // 4 + canvas.height() // 8, canvas.width() // 16, canvas.height() // 16)
-canvas.drawLine(canvas.width() // 4 + canvas.width() // 8, canvas.height() // 2 + canvas.height() // 8, canvas.width() // 2  + canvas.width() // 8, canvas.height() // 2 + canvas.height() // 8)
+canvas.setLineWidth(6)
+canvas.drawOval(width // 4, height // 4, width // 2, height // 2)
+canvas.drawOval(width // 4 + width // 8, height // 4 + height // 8, width // 16, height // 16)
+canvas.drawOval(width // 2 + width // 16, height // 4 + height // 8, width // 16, height // 16)
+canvas.drawLine(width // 4 + width // 8, height // 2 + height // 8, width // 2  + width // 8, height // 2 + height // 8)
 
 win.wait()
