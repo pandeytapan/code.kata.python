@@ -5,8 +5,9 @@ canvas = window.canvas()
 
 width= canvas.width()
 height = canvas.height()
-
+colorWhite = True
 for delta in range (0, width // 2, 40):
+    canvas.setFill("white" if colorWhite else "black")
     canvas.drawOval(delta , delta, width - 2 * delta, height - 2 * delta)
 
 window.wait()
