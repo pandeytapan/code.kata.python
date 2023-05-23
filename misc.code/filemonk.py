@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python4
 
 import os
 from faker import Faker
