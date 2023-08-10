@@ -17,8 +17,8 @@ class vector:
         return bool(abs(self))
 
     def __add__(self, o):
-        x = self.x + other.x
-        y = self.y + other.y
+        x = self.x + o.x
+        y = self.y + o.y
         return vector(x, y)
 
     def __mul__(self, s):
