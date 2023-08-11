@@ -2,6 +2,7 @@
 
 # Cartesian product without listcomps
 
+import array
 colours = ['Red', 'Black']
 sizes = ['S', 'M', 'L']
 
@@ -23,3 +24,13 @@ print(l)
 symbols = 'ÿנअ ना'
 val = tuple(ord(s) for s in symbols)
 print(val)
+
+# Creating an array using the symbols
+arr = array.array('I', (ord(s) for s in symbols))
+print(arr)
+
+# A for loop is best example of the generator expression here. We aren't losing any memory to the bloating and better 
+# using genexp here to create an item at a time.
+
+for i in (f"{c} {s}" for c in colours for s in sizes):
+    print(i)
