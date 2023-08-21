@@ -11,3 +11,9 @@ for passport in sorted(traveler_ids):
     # A tuple can also be unpacked if required
     country, pass_id = passport
     print(f'{country} - {pass_id}')
+
+# A visible sign of the tuple unpacking is the unpacking of the passengers
+# Putting a * unpacks the tuple element into iterable rest_traveller
+first_traveller, *rest_traveller = traveler_ids
+
+print(f"first traveller: {first_traveller} and rest of them {rest_traveller}") 
