@@ -17,6 +17,9 @@ with open(sys.argv[1], encoding='utf-8') as fp:
             # print(f"Matched the word {word} at {location}")
             # Get the list of occurances for the word "word"
             # The code below is bad choice as we are adding a default empty dictionary in case none is matched against the word
+            # word_index.get(word) is another way to write word_index[word]
+            # We are passing second argument the empty dictionary [] to avoid the keyerror
+            # there has to be a better way to do this
             occurances = word_index.get(word, [])
             occurances.append(location)
             word_index[word] = occurances
