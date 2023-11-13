@@ -1,3 +1,3 @@
 - The `defaultdict` calls the `__default_factory__` only for the `__getitem__`.
-- The underlying thing taht actually gets called is the `__missing__`.
-- Derive a class from the `dict` and provide it with the `__missing__` now instead of the `KeyError` we will see the `__missing__` gettng called for the `getitem`.
+- The underlying thing that actually gets called is the `__missing__`.
+- Derive a class from the `dict` and provide it with the `__missing__` now instead of the `KeyError` we will see the `__missing__` getting called for the `__getitem__`.
