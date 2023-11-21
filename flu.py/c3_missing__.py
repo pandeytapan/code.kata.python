@@ -10,3 +10,6 @@ class StrKeyDict(dict):
             print("StrKeyDict: __caught__KeyError_")
             return default
 
+    def __contains__(self, key):
+        print("StrKeyDict: callback invoked __contains__")
+        return key in self.keys() or str(key) in self.keys()
