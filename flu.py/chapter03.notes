@@ -2,4 +2,5 @@
 - The underlying thing that actually gets called is the `__missing__`.
 - Derive a class from the `dict` and provide it with the `__missing__` now instead of the `KeyError` we will see the `__missing__` getting called for the `__getitem__`.
 - When using `[]` for the dictionary it uses the `getitem` to retrieve the values. However, `get` is used exclusively to retrieve the values.
-
+- In such cases the `get` never makes the use of the `[]`.
+- Whenever we have a missing key the `__getitem__` will call the `__missing__`. This gives us the opportunity to handle the missing key and provide one
