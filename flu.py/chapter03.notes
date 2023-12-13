@@ -20,4 +20,9 @@ ord_dict2 = OrderedDict([('pear': 1), ('apple': 3), ('orange': 4)])
 
 # Order matters in the ordered dictionaries
 ord_dict1 == ord_dict2 # This will return the false
-
+- What can be added as a key to the dictionary or what can be added to a set is known as hashable.
+- Hashable elements must: 
+- Be immutable i.e. their value cannot be changed after they're crea
+- Must implement the hash function.
+- Must implement the `__eq__`
+- A container is hashable if all its elements are hashable.
