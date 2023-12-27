@@ -26,3 +26,7 @@ ord_dict1 == ord_dict2 # This will return the false
 - Must implement the hash function.
 - Must implement the `__eq__`
 - A container is hashable if all its elements are hashable.
+- A set in literal format is written as {1, 2, 3, 4}
+- An empty set is written as `set()` and an empty dictionary is written as `{}`.
+- Like list comprehension we also have set comprehension in Python
+- There is no special symbol to create a frozenset(), we must creates it using the constructor `frozenset()`
