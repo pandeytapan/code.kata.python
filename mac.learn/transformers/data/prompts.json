@@ -1,0 +1,32 @@
+{
+    "prompts": [
+        {
+            "prompt_id": "1",
+            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed. The robot has been programmed with a set of rules that it must follow in order to be considered human.",
+            "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
+            "prompt_type": "text"
+        },
+        {
+            "prompt_id": "2",
+            "prompt_uuid": "bd2a1122-abd0-11ee-a849-870f462a57a8",
+            "prompt_text": "",
+            "prompt_instruction": "Generate a list of three made-up book titles along with their authors and genres. Provide them in JSON format with the following keys: book_id, title, author, genre.",
+            "prompt_type": "text"
+        },
+        {
+            "prompt_id": "3",
+            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed. The robot has been programmed with a set of rules that it must follow in order to be considered human.",
+            "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
+            "prompt_type": "text"
+        },
+        {
+            "prompt_id": "4",
+            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed.",
+            "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
+            "prompt_type": "text"
+        }
+    ]
+}
