@@ -48,13 +48,26 @@ if __name__ == "__main__":
     load_dotenv(find_dotenv())
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     
-    text, prompt = get_prompt("./data/prompts.json", "1")
     # Prompt tactic 1 : Use the delimiter to clearly separate the text from the prompt
     # This is helpful in avoiding the model from getting confused between the prompt and the text
     # and also to be safe from the prompt injection attacks.
-    print(get_completion(prepare_prompt(prompt, text)))
+    # text, prompt = get_prompt("./data/prompts.json", "1")
+    # print(get_completion(prepare_prompt(prompt, text)))
     
     # Prompt tactic 2 : Ask for the structured output like a json or html or dictionary
     # This is helpful in getting the output in the desired format
-    text, prompt = get_prompt("./data/prompts.json", "2")
+    # text, prompt = get_prompt("./data/prompts.json", "2")
+    # print(get_completion(prepare_prompt(prompt, text)))
+
+    # Prompt tactic 3 and 4: Ask model to verify if the condtions are met.
+    # This is helpful in getting the output in the desired format
+    # text, prompt = get_prompt("./data/prompts.json", "3")
+    # print(get_completion(prepare_prompt(prompt, text)))
+
+    # text, prompt = get_prompt("./data/prompts.json", "4")
+    # print(get_completion(prepare_prompt(prompt, text)))
+
+    # Prompt tactic 5: With few shots we can get the LLM to respond promptly
+
+    text, prompt = get_prompt("./data/prompts.json", "1")
     print(get_completion(prepare_prompt(prompt, text)))

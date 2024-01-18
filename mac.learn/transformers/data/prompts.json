@@ -5,28 +5,35 @@
             "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
             "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed. The robot has been programmed with a set of rules that it must follow in order to be considered human.",
             "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
-            "prompt_type": "text"
+            "generation_type": "text"
         },
         {
             "prompt_id": "2",
             "prompt_uuid": "bd2a1122-abd0-11ee-a849-870f462a57a8",
             "prompt_text": "",
             "prompt_instruction": "Generate a list of three made-up book titles along with their authors and genres. Provide them in JSON format with the following keys: book_id, title, author, genre.",
-            "prompt_type": "text"
+            "generation_type": "json"
         },
         {
             "prompt_id": "3",
             "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
-            "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed. The robot has been programmed with a set of rules that it must follow in order to be considered human.",
-            "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
-            "prompt_type": "text"
+            "prompt_text": "Making a cup of tea is easy! First, you need to get some water boiling. While that's happening, grab a cup and put a tea bag in it. Once the water is hot enough, just pour it over the tea bag. Let it sit for a bit so the tea can steep. After a few minutes, take out the tea bag. If you like, you can add some sugar or milk to taste. And that's it! You've got yourself a delicious cup of tea to enjoy.",
+            "prompt_instruction": "You will be provided with text delimited by triple quotes. If it contains a sequence of instructions, re-write those instructions in the following format: Step 1 - Step 2 - Step N. If the text does not contain a sequence of instructions, then simply write \"No steps provided.\" {text}",
+            "generation_type": "list"
         },
         {
             "prompt_id": "4",
-            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
-            "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed.",
-            "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
-            "prompt_type": "text"
+            "prompt_uuid": "18cd60aa-ae02-11ee-b84e-7ffbe86b3747",
+            "prompt_text": "The sun is shining brightly today, and the birds are singing. It's a beautiful day to go for a walk in the park. The flowers are blooming, and the trees are swaying gently in the breeze. People are out and about, enjoying the lovely weather. Some are having picnics, while others are playing games or simply relaxing on the grass. It's a perfect day to spend time outdoors and appreciate the beauty of nature.",
+            "prompt_instruction": "You will be provided with text delimited by triple quotes. If it contains a sequence of instructions, re-write those instructions in the following format: Step 1 - Step 2 - Step N. If the text does not contain a sequence of instructions, then simply write \"No steps provided.\" {text}",
+            "generation_type": "list"
+        },
+        {
+            "prompt_id": "5",
+            "prompt_uuid": "ebd87a46-ae36-11ee-9030-ef0efc3213fa",
+            "prompt_text": "",
+            "prompt_instruction": "Your task is to answer in a consistent style.\n<child>: Teach me about patience.\n<grandparent>: The river that carves the deepest valley flows from a modest spring; the grandest symphony originates from a single note; the most intricate tapestry begins with a solitary thread.\n<child>: Teach me about discipline.",
+            "generation_type": "few-shot"
         }
     ]
 }

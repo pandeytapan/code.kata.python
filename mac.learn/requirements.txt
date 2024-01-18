@@ -16,3 +16,6 @@ openai
 # other libraries
 python-dotenv>=0.17.0
 black>=21.6b0
+
+# Lazy loading of the json file
+ijson>=3.1.4
