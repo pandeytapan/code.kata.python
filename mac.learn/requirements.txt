@@ -9,3 +9,13 @@ scikit-learn>=0.24.0
 # Visualization libraries
 matplotlib>=3.4.0
 seaborn>=0.11.0
+
+# Generative models
+openai
+
+# other libraries
+python-dotenv>=0.17.0
+black>=21.6b0
+
+# Lazy loading of the json file
+ijson>=3.1.4
