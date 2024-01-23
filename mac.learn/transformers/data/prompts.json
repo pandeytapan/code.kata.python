@@ -31,7 +31,7 @@
         {
             "prompt_id": "5",
             "prompt_uuid": "ebd87a46-ae36-11ee-9030-ef0efc3213fa",
-            "prompt_text": "<child>: Teach me about persistence?",
+            "prompt_text": "<child>: Teach me about empathy?",
             "prompt_shot": "\n<child>: Teach me about patience.\n<grandparent>: The river that carves the deepest valley flows from a modest spring; the grandest symphony originates from a single note; the most intricate tapestry begins with a solitary thread.\n<child>: Teach me about discipline.",
             "prompt_instruction": "The text between triple backticks is a sample conversation ```{shot}```. Your task is to answer in a consistent style for the question demarked in brackets [{text}].\nTry to respond as a dialogue between two parties.\nReturn the answer in markdown format.",
             "generation_type": "few-shot"
