@@ -23,8 +23,11 @@ def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str]:
         prompts = ijson.items(f, "prompts.item")
         for prompt in prompts:
             if prompt["prompt_id"] == prompt_id:
-                if prompt.get("prompt_shot") is not None:
+                gen_type = prompt["generation_type"]
+                if gen_type == "few_shot":
                     return prompt["prompt_text"], prompt["prompt_instruction"], prompt["prompt_shot"]
+                elif gen_type == "summary":
+                    return prompt["prompt_text"], prompt["prompt_instruction"], prompt["atom_count"], prompt["atom_unit"]
                 return prompt["prompt_text"], prompt["prompt_instruction"]
 
 
@@ -73,5 +76,5 @@ if __name__ == "__main__":
 
     # Prompt tactic 5: With few shots we can get the LLM to respond promptly
 
-    text, prompt, shot = get_prompt("./data/prompts.json", "5")
+    text, prompt, shot = get_prompt("./data/prompts.json", "6")
     print(get_completion(prepare_prompt(prompt, text, shot)))
