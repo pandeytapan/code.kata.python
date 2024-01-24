@@ -31,10 +31,19 @@
         {
             "prompt_id": "5",
             "prompt_uuid": "ebd87a46-ae36-11ee-9030-ef0efc3213fa",
-            "prompt_text": "<child>: Teach me about persistence?",
+            "prompt_text": "<child>: Teach me about empathy?",
             "prompt_shot": "\n<child>: Teach me about patience.\n<grandparent>: The river that carves the deepest valley flows from a modest spring; the grandest symphony originates from a single note; the most intricate tapestry begins with a solitary thread.\n<child>: Teach me about discipline.",
             "prompt_instruction": "The text between triple backticks is a sample conversation ```{shot}```. Your task is to answer in a consistent style for the question demarked in brackets [{text}].\nTry to respond as a dialogue between two parties.\nReturn the answer in markdown format.",
             "generation_type": "few-shot"
+        },
+        {
+            "prompt_id": "6",
+            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "Got this panda plush toy for my daughter's birthday, who loves it and takes it everywhere. It's soft and super cute, and its face has a friendly look. It's a bit small for what I paid though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to her.",
+            "prompt_instruction": "Summarize the text delimited by triple backticks. ```{text}```. Make sure to generate a summary that is at most {count} {unit}.",
+            "generation_type": "summary",
+            "atom_count": "50",
+            "atom_unit": "characters"
         }
     ]
 }

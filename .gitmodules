@@ -1,0 +1,3 @@
+[submodule "mslearn-ai-language"]
+	path = mslearn-ai-language
+	url = https://github.com/MicrosoftLearning/mslearn-ai-language

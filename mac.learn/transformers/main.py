@@ -23,21 +23,23 @@ def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str]:
         prompts = ijson.items(f, "prompts.item")
         for prompt in prompts:
             if prompt["prompt_id"] == prompt_id:
-                if prompt.get("prompt_shot") is not None:
+                gen_type = prompt["generation_type"]
+                if gen_type == "few-shot":
                     return prompt["prompt_text"], prompt["prompt_instruction"], prompt["prompt_shot"]
+                elif gen_type == "summary":
+                    return prompt["prompt_text"], prompt["prompt_instruction"], prompt["atom_count"], prompt["atom_unit"]
                 return prompt["prompt_text"], prompt["prompt_instruction"]
 
 
-def prepare_prompt(prompt: str, text: str, shot: str = None) -> str:
+def prepare_prompt(prompt: str, text: str, **kwargs) -> str:
     '''
     Prepare the prompt by injecting the text into the prompt
-    @param prompt: Prompt
-    @param text: Text
-    @return: Prepared prompt
+    @param prompt: Prompt string with the placeholders.
+    @param text: Text to be injected into the prompt.
+    @param kwargs: Additional arguments to be injected into the prompt.
+    @return: Prepared prompt.
     '''
-    if shot:
-        return prompt.format(text=text, shot=shot)
-    return prompt.format(text=text)
+    return prompt.format(text=text, **kwargs)
 
 
 def get_completion(prompt: str, llm_engine: str = "gpt-3.5-turbo") -> Any:
@@ -73,5 +75,8 @@ if __name__ == "__main__":
 
     # Prompt tactic 5: With few shots we can get the LLM to respond promptly
 
-    text, prompt, shot = get_prompt("./data/prompts.json", "5")
-    print(get_completion(prepare_prompt(prompt, text, shot)))
+    # text, prompt, shot = get_prompt("./data/prompts.json", "5")
+    # print(get_completion(prepare_prompt(prompt, text, shot=shot)))
+
+    text, prompt, count, unit = get_prompt("./data/prompts.json", "6")
+    print(get_completion(prepare_prompt(prompt, text, count=count, unit=unit)))
