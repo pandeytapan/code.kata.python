@@ -4,7 +4,7 @@ import ijson
 from dotenv import load_dotenv, find_dotenv
 from typing import Tuple, Any
 from pathlib import Path
-
+import argparse
 
 def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str]:
     '''
@@ -53,6 +53,14 @@ def get_completion(prompt: str, llm_engine: str = "gpt-3.5-turbo") -> Any:
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    
+    # Add the argument parser to get id of the prompt as command line argument
+    parser = argparse.ArgumentParser(description="Get the prompt id") 
+    parser.add_argument("--prompt_id", type=str, help="Prompt id")
+    args = parser.parse_args()
+    prompt_id = args.prompt_id
+
+    
 
     # Prompt tactic 1 : Use the delimiter to clearly separate the text from the prompt
     # This is helpful in avoiding the model from getting confused between the prompt and the text
@@ -78,5 +86,7 @@ if __name__ == "__main__":
     # text, prompt, shot = get_prompt("./data/prompts.json", "5")
     # print(get_completion(prepare_prompt(prompt, text, shot=shot)))
 
-    text, prompt, count, unit = get_prompt("./data/prompts.json", "6")
-    print(get_completion(prepare_prompt(prompt, text, count=count, unit=unit)))
+    text, prompt, count, unit = get_prompt("./data/prompts.json", prompt_id)
+    generated_text = prepare_prompt(prompt, text, count=count, unit=unit)
+    print(f"\033[91mPrompt\033[0m: {generated_text}")
+    print(f"\n\033[93mCompletion\033[0m: {get_completion(generated_text)}")
