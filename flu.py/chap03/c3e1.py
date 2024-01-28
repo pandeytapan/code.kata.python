@@ -33,5 +33,5 @@ try:
 except KeyError as e:
     print("Cannot find key", e)
 # instead of the code above we can use get()with default argument
-print(country_codes.get(45, 'Unexplored via phone'))
+print(country_codes.get(45, 'Unexplored'))
 
