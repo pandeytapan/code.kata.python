@@ -1,5 +1,3 @@
-#!/usr/bin/python4
-
 import os
 from faker import Faker
 import random
@@ -44,7 +42,8 @@ for i in range(num_folders):
 
         # limit the file size
         with open(file_path, mode="w") as f:
-            textdata = fake.text(max_nb_chars=random.randint(100, TWO_KIB_IN_BYTES))
+            textdata = fake.text(
+                max_nb_chars=random.randint(100, TWO_KIB_IN_BYTES))
             f.write(textdata)
 
         print(f"Created file: {file_path}")
