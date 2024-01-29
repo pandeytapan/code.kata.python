@@ -53,6 +53,15 @@
             "generation_type": "summary",
             "atom_count": "20",
             "atom_unit": "words"
+        },
+        {
+            "prompt_id": "8",
+            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "Got this panda plush toy for my daughter's birthday, who loves it and takes it everywhere. It's soft and super cute, and its face has a friendly look. It's a bit small for what I paid though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to her.",
+            "prompt_instruction": "Your task is to extract relevent information from the product review of an ecommerce website to give feedback to the shipping department.\nFrom the review below, delimited by the triple quotes extract the information relevent to the shipping department.\nReview: ```{text}```",
+            "generation_type": "text",
+            "atom_count": "20",
+            "atom_unit": "words"
         }
     ]
 }
