@@ -23,13 +23,9 @@ def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str]:
     with path.open("r", encoding="utf-8") as f:
         prompts = ijson.items(f, "prompts.item")
         for prompt in prompts:
-            if prompt["prompt_id"] == prompt_id:
-                gen_type = prompt["generation_type"]
-                if gen_type == "few-shot":
-                    return prompt["prompt_text"], prompt["prompt_instruction"], prompt["prompt_shot"]
-                elif gen_type == "summary":
-                    return prompt["prompt_text"], prompt["prompt_instruction"], prompt["atom_count"], prompt["atom_unit"]
-                return prompt["prompt_text"], prompt["prompt_instruction"]
+            if prompt["meta_prompt_id"] == prompt_id:
+                prompts_part = [tuple(key, value) for key, value in prompt.items()] 
+                return prompts_part
 
 
 def prepare_prompt(prompt: str, text: str, **kwargs) -> str:
@@ -85,7 +81,7 @@ if __name__ == "__main__":
     # text, prompt, shot = get_prompt("./data/prompts.json", "5")
     # print(get_completion(prepare_prompt(prompt, text, shot=shot)))
 
-    text, prompt, count, unit = get_prompt("./data/prompts.json", prompt_id)
+    text, prompt, count, unit = get_prompt("./data/prompts.json", "6")
     generated_text = prepare_prompt(prompt, text, count=count, unit=unit)
     print(f"\033[91mPrompt\033[0m: {generated_text}")
     print(f"\n\033[93mCompletion\033[0m: {get_completion(generated_text)}")
