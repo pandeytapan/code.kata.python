@@ -1,49 +1,67 @@
 {
     "prompts": [
         {
-            "prompt_id": "1",
-            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "meta_prompt_id": "1",
+            "meta_prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
             "prompt_text": "A robot is trying to learn how to be human. It is a very difficult task, but the robot is determined to succeed. The robot has been programmed with a set of rules that it must follow in order to be considered human.",
             "prompt_instruction": "Summarize the text delimited by triple backticks into a single sentence. ```{text}```",
-            "generation_type": "text"
+            "meta_generation_type": "text"
         },
         {
-            "prompt_id": "2",
-            "prompt_uuid": "bd2a1122-abd0-11ee-a849-870f462a57a8",
+            "meta_prompt_id": "2",
+            "meta_prompt_uuid": "bd2a1122-abd0-11ee-a849-870f462a57a8",
             "prompt_text": "",
             "prompt_instruction": "Generate a list of three made-up book titles along with their authors and genres. Provide them in JSON format with the following keys: book_id, title, author, genre.",
-            "generation_type": "json"
+            "meta_generation_type": "json"
         },
         {
-            "prompt_id": "3",
-            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "meta_prompt_id": "3",
+            "meta_prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
             "prompt_text": "Making a cup of tea is easy! First, you need to get some water boiling. While that's happening, grab a cup and put a tea bag in it. Once the water is hot enough, just pour it over the tea bag. Let it sit for a bit so the tea can steep. After a few minutes, take out the tea bag. If you like, you can add some sugar or milk to taste. And that's it! You've got yourself a delicious cup of tea to enjoy.",
             "prompt_instruction": "You will be provided with text delimited by triple quotes. If it contains a sequence of instructions, re-write those instructions in the following format: Step 1 - Step 2 - Step N. If the text does not contain a sequence of instructions, then simply write \"No steps provided.\" {text}",
-            "generation_type": "list"
+            "meta_generation_type": "list"
         },
         {
-            "prompt_id": "4",
-            "prompt_uuid": "18cd60aa-ae02-11ee-b84e-7ffbe86b3747",
+            "meta_prompt_id": "4",
+            "meta_prompt_uuid": "18cd60aa-ae02-11ee-b84e-7ffbe86b3747",
             "prompt_text": "The sun is shining brightly today, and the birds are singing. It's a beautiful day to go for a walk in the park. The flowers are blooming, and the trees are swaying gently in the breeze. People are out and about, enjoying the lovely weather. Some are having picnics, while others are playing games or simply relaxing on the grass. It's a perfect day to spend time outdoors and appreciate the beauty of nature.",
             "prompt_instruction": "You will be provided with text delimited by triple quotes. If it contains a sequence of instructions, re-write those instructions in the following format: Step 1 - Step 2 - Step N. If the text does not contain a sequence of instructions, then simply write \"No steps provided.\" {text}",
-            "generation_type": "list"
+            "meta_generation_type": "list"
         },
         {
-            "prompt_id": "5",
-            "prompt_uuid": "ebd87a46-ae36-11ee-9030-ef0efc3213fa",
+            "meta_prompt_id": "5",
+            "meta_prompt_uuid": "ebd87a46-ae36-11ee-9030-ef0efc3213fa",
             "prompt_text": "<child>: Teach me about empathy?",
             "prompt_shot": "\n<child>: Teach me about patience.\n<grandparent>: The river that carves the deepest valley flows from a modest spring; the grandest symphony originates from a single note; the most intricate tapestry begins with a solitary thread.\n<child>: Teach me about discipline.",
             "prompt_instruction": "The text between triple backticks is a sample conversation ```{shot}```. Your task is to answer in a consistent style for the question demarked in brackets [{text}].\nTry to respond as a dialogue between two parties.\nReturn the answer in markdown format.",
-            "generation_type": "few-shot"
+            "meta_generation_type": "few-shot"
         },
         {
-            "prompt_id": "6",
-            "prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "meta_prompt_id": "6",
+            "meta_prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
             "prompt_text": "Got this panda plush toy for my daughter's birthday, who loves it and takes it everywhere. It's soft and super cute, and its face has a friendly look. It's a bit small for what I paid though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to her.",
-            "prompt_instruction": "Summarize the text delimited by triple backticks. ```{text}```. Make sure to generate a summary that is at most {count} {unit}.",
-            "generation_type": "summary",
+            "prompt_instruction": "Summarize the text delimited by triple backticks. ```{prompt_text}```. Make sure to generate a summary that is at most {atom_count} {atom_unit}.",
+            "meta_generation_type": "summary",
             "atom_count": "50",
             "atom_unit": "characters"
+        },
+        {
+            "meta_prompt_id": "7",
+            "meta_prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "Got this panda plush toy for my daughter's birthday, who loves it and takes it everywhere. It's soft and super cute, and its face has a friendly look. It's a bit small for what I paid though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to her.",
+            "prompt_instruction": "Summarize the text delimited by triple backticks. ```{text}```. Make sure to generate a summary that is at most {count} {unit} to give feedback to the shipping department.",
+            "meta_generation_type": "summary",
+            "atom_count": "20",
+            "atom_unit": "words"
+        },
+        {
+            "meta_prompt_id": "8",
+            "meta_prompt_uuid": "7008582c-abd0-11ee-b760-a3b8bdc4f7d5",
+            "prompt_text": "Got this panda plush toy for my daughter's birthday, who loves it and takes it everywhere. It's soft and super cute, and its face has a friendly look. It's a bit small for what I paid though. I think there might be other options that are bigger for the same price. It arrived a day earlier than expected, so I got to play with it myself before I gave it to her.",
+            "prompt_instruction": "Your task is to extract relevent information from the product review of an ecommerce website to give feedback to the shipping department.\nFrom the review below, delimited by the triple quotes extract the information relevent to the shipping department.\nReview: ```{text}```",
+            "meta_generation_type": "text",
+            "atom_count": "20",
+            "atom_unit": "words"
         }
     ]
 }
