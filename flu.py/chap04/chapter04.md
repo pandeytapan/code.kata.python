@@ -88,3 +88,5 @@ With the introduction of the **list comprehension** and the **set comprehension*
 >>> [factorial(i) for i in range(5)]
 [1, 1, 2, 6, 24]
 ```
+
+## Anonymous functions
