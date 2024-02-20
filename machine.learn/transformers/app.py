@@ -2,12 +2,12 @@ from openai import OpenAI
 import os
 import ijson
 from dotenv import load_dotenv, find_dotenv
-from typing import Tuple, Any
+from typing import Tuple, Any, Dict, Optional
 from pathlib import Path
 import argparse
 
 
-def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str]:
+def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str, Optional[Dict[str, str]]]:
     '''
     Open the json file and read the prompt and the text
     @param file_path: Path of the file
@@ -24,8 +24,10 @@ def get_prompt(file_path: str, prompt_id: str) -> Tuple[str, str]:
         prompts = ijson.items(f, "prompts.item")
         for prompt in prompts:
             if prompt["meta_prompt_id"] == prompt_id:
-                prompts_part = [tuple(key, value) for key, value in prompt.items()] 
-                return prompts_part
+                prompts_part = {key: value for key, value in prompt.items() if not key.startswith("meta_")}
+                break
+
+    return prompts_part["text"], prompts_part["prompt_instruction"], {key: value for key, value in prompts_part.items() if key not in ["text", "prompt_instruction"]}
 
 
 def prepare_prompt(prompt: str, text: str, **kwargs) -> str:
@@ -53,7 +55,7 @@ if __name__ == "__main__":
 
     # Add the argument parser to get id of the prompt as command line argument
     parser = argparse.ArgumentParser(description="Get the prompt id")
-    parser.add_argument("--prompt_id", type=str, help="Prompt id")
+    parser.add_argument("--prompt_id", type=str, help="Prompt id", default="1")
     args = parser.parse_args()
     prompt_id = args.prompt_id
 
@@ -81,15 +83,16 @@ if __name__ == "__main__":
     # text, prompt, shot = get_prompt("./data/prompts.json", "5")
     # print(get_completion(prepare_prompt(prompt, text, shot=shot)))
 
-    text, prompt, count, unit = get_prompt("./data/prompts.json", "6")
-    generated_text = prepare_prompt(prompt, text, count=count, unit=unit)
+    text, prompt, prompt_kwargs = get_prompt("./data/prompts.json", "6")
+    print(text, prompt, prompt_kwargs)
+    generated_text = prepare_prompt(prompt, text, **prompt_kwargs)
+
     print(f"\033[91mPrompt\033[0m: {generated_text}")
     print(f"\n\033[93mCompletion\033[0m: {get_completion(generated_text)}")
-    get_completion(generated_text)
 
     # Prompt tactic 6: With few shots we can get the LLM to respond promptly
-    text, prompt = get_prompt("./data/prompts.json", "8")
-    generated_text = prepare_prompt(prompt, text)
-    print(f"\033[91mPrompt\033[0m: {generated_text}")
-    print(f"\n\033[93mCompletion\033[0m: {get_completion(generated_text)}")
-    get_completion(generated_text)
+    # text, prompt = get_prompt("./data/prompts.json", "8")
+    # generated_text = prepare_prompt(prompt, text)
+    # print(f"\033[91mPrompt\033[0m: {generated_text}")
+    # print(f"\n\033[93mCompletion\033[0m: {get_completion(generated_text)}")
+    # get_completion(generated_text)

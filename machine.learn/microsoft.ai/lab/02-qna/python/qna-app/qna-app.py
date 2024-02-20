@@ -15,10 +15,7 @@ def main():
 
         # Create client using endpoint and key
 
-
         # Submit a question and display the answer
-
-
 
     except Exception as ex:
         print(ex)
