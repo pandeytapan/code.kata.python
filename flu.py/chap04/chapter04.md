@@ -88,3 +88,7 @@ With the introduction of the **list comprehension** and the **set comprehension*
 >>> [factorial(i) for i in range(5)]
 [1, 1, 2, 6, 24]
 ```
+
+## Anonymous functions
+
+The `lambda` keyword is basically an syntatic suger that creates a function just liek how we do with the `def` keyword.
