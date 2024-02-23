@@ -1,0 +1,3 @@
+# Linters
+flake8
+autopep8
