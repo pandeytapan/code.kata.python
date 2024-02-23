@@ -1,3 +1,13 @@
 # Linters
 flake8
 autopep8
+# Virtual environment
+# name: python.env
+# interpreter_path: /usr/bin/python3
+# requirements_path: requirements.txt
+# include_pip: true
+# include_setuptools: true
+# include_wheel: true
+# create_venv: true
+# pyenv activate python.env
+# pyenv deactivate
