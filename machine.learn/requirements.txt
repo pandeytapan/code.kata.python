@@ -21,3 +21,14 @@ ijson>=3.1.4
 
 # Linting
 flake8>=3.9.2
+# Virtual environment
+# name: ai.env
+# interpreter_path: /usr/bin/python3
+# requirements_path: requirements.txt
+# include_pip: true
+# include_setuptools: true
+# include_wheel: true
+# create_venv: true
+# pyenv activate python.env
+# pyenv deactivate
+
