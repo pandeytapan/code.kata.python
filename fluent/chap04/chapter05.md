@@ -22,7 +22,7 @@ def factorial(num: int) -> int:
 
 The code below shows how we can use the functions as the first class objects:
 
-```bash
+```pycon
 >>> from c5e1 import factorial
 >>> print(factorial.__doc__)
 
@@ -47,7 +47,7 @@ A function that takes another function as an argument or that returns another fu
 
 Here is an example how we can pass the `factorial` to the `map` and get a list of first `n` factorials:
 
-```bash
+```pycon
 >>> list(map(factorial, range(10)))
 [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
 ```
@@ -56,7 +56,7 @@ Here is an example how we can pass the `factorial` to the `map` and get a list o
 
 The next example shows how we can sort a list of words by their length using the `sorted` function:
 
-```bash
+```pycon
 >>> fruits = ['apple', 'pineapple', 'guava', 'cherry', 'orange', 'banana', 'dragonfruit', 'custard apple']
 >>> sorted(fruits, key=len)
 ['apple', 'guava', 'cherry', 'orange', 'banana', 'pineapple', 'dragonfruit', 'custard apple']
@@ -66,7 +66,7 @@ Any function that takes a single argument can be passed as the `key` here. This 
 
 We are not going to store the reversed fruit name but instead we will use it in the sorting.
 
-```bash
+```pycon
 >>> fruits = ['apple', 'pineapple', 'guava', 'cherry', 'orange', 'banana', 'dragonfruit', 'custard apple']
 >>> def reversed(fruit:str)->str:
 ...     return fruit[::-1]
@@ -81,7 +81,7 @@ We are not going to store the reversed fruit name but instead we will use it in 
 
 With the introduction of the **list comprehension** and the **set comprehension** we can replace the `map`:
 
-```bash
+```pycon
 >>> from c5e1 import factorial
 >>> list(map(factorial, range(5)))
 [1, 1, 2, 6, 24]
@@ -106,3 +106,50 @@ Whenever any user-defined type has `()` operator defined for itself, then it is 
 - **Generator functions**: Functions that use the `yield` keyword.
 
 ## Creating a user-defined callable type
+
+We can make arbitrary python objects to behave as a function. All it requires is implementation of the `__call__` method.
+Below we have is a class named `Bingo` that implements `__call__` and thus can be directly called as function (*see `bingoit()`*)
+
+```python
+
+import random
+
+
+class Bingo:
+    '''
+    Bingo is an example of the user defined callable type.
+    It implements __call__ that allows it to make it a callable type.
+    '''
+
+    def __init__(self, items):
+        self._items = list(items)  # Make a copy of the passed iterable
+        random.shuffle(self._items)
+
+    def pick(self):
+        '''
+        Main method of the Bingo using which we can pick any random element
+        '''
+        try:
+            return self._items.pop()
+        except IndexError:
+            raise LookupError("Pick from empty Bingo Cage.")
+
+    def __call__(self):
+        '''
+        Makes Bingo a callable.
+        With this implementation we can call Bingo as a function
+        '''
+        return self.pick()
+```
+
+To use the the `Bingo` as a object:
+
+```pycon
+>>> from bingo import Bingo
+>>> bingoit = Bingo(range(20))
+>>> bingoit.pick()
+15
+>>> bingoit()
+4
+>>>
+```
