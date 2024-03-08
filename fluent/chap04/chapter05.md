@@ -153,3 +153,26 @@ To use the the `Bingo` as a object:
 4
 >>>
 ```
+
+## Introspection of functions
+
+If we look at the attributes of the function using te `dir()` we can see that there are many attributes for a function:
+
+```pycon
+>>> dir (factorial)
+['__annotations__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+>>>
+```
+
+We can however add new attributes to the functions as required (though it is not a common practice)
+
+```bash
+>>> factorial.__doc__
+'\n    Returns the factorial of a number\n    @param num: Number whose factorial is to be calculated\n    @return: Calculated factorial of the number\n    '
+>>> factorial.what_you_do = "I can calculate factorial for any integer."
+>>> dir(factorial)
+['__annotations__', '__builtins__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__getstate__', '__globals__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'what_you_do']
+>>> factorial.what_you_do
+'I can calculate factorial for any integer.'
+>>>
+```
