@@ -176,3 +176,26 @@ We can however add new attributes to the functions as required (though it is not
 'I can calculate factorial for any integer.'
 >>>
 ```
+
+## The positional and the keyword arguments
+
+In Python we can write function to which we can pass any number of the arguments *positionally*. This means basically writing the arguments as they come.
+Here is example of a function that takes all the arguments positionally:
+
+```pycon
+>>> def gulp_all(*args):
+...     for arg in args:
+...             print(arg)
+... 
+>>> gulp_all(1, 2, "hello")
+1
+2
+hello
+>>> def gulp_all(*args):
+...     print(type(args))
+...     print(*args)
+... 
+>>> gulp_all(1, 2, "hello")
+<class 'tuple'>
+1 2 hello
+```
