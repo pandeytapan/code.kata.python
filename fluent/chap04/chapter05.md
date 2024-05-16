@@ -187,10 +187,19 @@ Here is example of a function that takes all the arguments positionally:
 ...     for arg in args:
 ...             print(arg)
 ... 
+```
+
+The `gulp_all` takes all the arguments packed into a tuple `args`. The syntax for this is `*args`. We can unpack and get all the arguments back as follows:
+
+```pycon
 >>> gulp_all(1, 2, "hello")
 1
 2
 hello
+```
+Here is another version of the `gulp_all` that prints the type of the `args` as well as unpacks them to `print` function.
+
+```pycon
 >>> def gulp_all(*args):
 ...     print(type(args))
 ...     print(*args)
@@ -199,3 +208,4 @@ hello
 <class 'tuple'>
 1 2 hello
 ```
+Let's now talk about the **keyword arguments**
