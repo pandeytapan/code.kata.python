@@ -209,3 +209,56 @@ Here is another version of the `gulp_all` that prints the type of the `args` as 
 1 2 hello
 ```
 Let's now talk about the **keyword arguments**
+
+We have a function below named `counter` that takes two positional arguments `start` and `end`. 
+
+```pycon
+>>> def counter(start, end, delta=1):
+...     for i in range(start, end, delta):
+...             print(i)
+...
+```
+
+Calling this function with those two arguments basically prints values frm `start` till `end`.
+
+```
+>>> counter(12, 21)
+12
+13
+14
+15
+16
+17
+18
+19
+20
+```
+
+We have however one more third argument that we can pass to it *positionaly*. This argument basically defines how many numbers to skip before we print the next number in series.
+
+```pycon
+>>> counter(12, 21, 2)
+12
+14
+16
+18
+20
+```
+
+This is keyword argument i.e. it has a name and a default value that is passed in case we do not supply it. The order of the keyword arguments doesn't matter if we are passing them with name:
+
+>>> def counter(start, end, delta=1, separator= ' '):
+...     print(separator.join(str(i) for i in range (start, end, delta)))
+... 
+>>> counter(1, 11, separator = '?')
+1?2?3?4?5?6?7?8?9?10
+>>> counter(1, 11, separator = ' - ')
+1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10
+>>> counter(1, 11, separator = ' - ', delta = 4)
+1 - 5 - 9
+>>> counter(1, 11, ' - ', 4)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in counter
+AttributeError: 'int' object has no attribute 'join'
+
