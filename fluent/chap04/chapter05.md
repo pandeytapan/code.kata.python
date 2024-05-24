@@ -245,20 +245,81 @@ We have however one more third argument that we can pass to it *positionaly*. Th
 20
 ```
 
-This is keyword argument i.e. it has a name and a default value that is passed in case we do not supply it. The order of the keyword arguments doesn't matter if we are passing them with name:
+This is keyword argument i.e. it has a name and a default value that is passed in case we do not supply it. 
+When an argument is passed to a function such that the argument hasa name and a default value it is called as keyword argument.
+The order of the keyword arguments doesn't matter if we are passing them with name. In the below seection we've a function `counter` that takes 4 arguments, out of which last two are provided as keyword arguments `delta` and `separator`.
 
+```pycon
 >>> def counter(start, end, delta=1, separator= ' '):
 ...     print(separator.join(str(i) for i in range (start, end, delta)))
 ... 
+```
+
+In the example below we are passing `separator` as keyword argument and this means that `delta` is passed implicitly as keyword argument.
+
+```pycon
 >>> counter(1, 11, separator = '?')
 1?2?3?4?5?6?7?8?9?10
 >>> counter(1, 11, separator = ' - ')
 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10
+```
+
+We can pass the keyword arguments in any order till we're passing them as **named** arguments:
+
+```pycon
 >>> counter(1, 11, separator = ' - ', delta = 4)
 1 - 5 - 9
+```
+
+However when passing them as the positional arguments we have to make sure that they're being passed according to their types
+
+```pycon
 >>> counter(1, 11, ' - ', 4)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "<stdin>", line 2, in counter
 AttributeError: 'int' object has no attribute 'join'
+```
 
+So to summerize:
+
+- We can pass the arguments as postional arguments and the order of passing matters.
+- We can pass the arguments as keyword arguments and in which case the order of passing doesn't matters.
+-
+## Accepting Keyword-only arguments
+
+we saw in out last examples that arguments can be passed positionally or as keyword arguments i.e. with a name and a value. There can be however circumstances when we can pass arguments only as the keyword arguments.
+
+The function below `greet` accepts two arguments `names` and `greeting`. The first argument accepts any number of the positional arguments and packs them into a tuple `greet`. The second argument in such cases can only be passed as a keyword-only argument.
+
+```pycon
+>>> def greet(*names, greeting):
+...     for name in names:
+...             print(greeting, name)
+... 
+```
+
+In the code snippet below we're passing greeting as a keyword argument and thus the Python can make a clear distinction from the positional arguments.
+
+```pycon
+>>> greet('Roy', 'Mohan', greeting="Hello")
+Hello Roy
+Hello Mohan
+```
+
+However, if we try to pass the keyword argument as a postional argument (which is possible) then we will get an error since python now cannot differentiate between the two.
+
+```pycon
+>>> greet('Roy', 'Mohan', "Hello")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: greet() missing 1 required keyword-only argument: 'greeting'
+>>> 
+```
+
+## Accepting Positional-only arguments
+
+> Works beyond Python 3.8
+
+
+## Accepting some keyword and some positional arguments
