@@ -246,7 +246,8 @@ We have however one more third argument that we can pass to it *positionaly*. Th
 ```
 
 This is keyword argument i.e. it has a name and a default value that is passed in case we do not supply it. 
-When an argument is passed to a function such that the argument hasa name and a default value it is called as keyword argument.
+**When an argument is passed to a function such that the argument has a name and a default value it is called as keyword argument.**
+In this sense all the positional arguments are also keyword or names argument when they are passed with a name and a value.
 The order of the keyword arguments doesn't matter if we are passing them with name. In the below seection we've a function `counter` that takes 4 arguments, out of which last two are provided as keyword arguments `delta` and `separator`.
 
 ```pycon
@@ -262,6 +263,12 @@ In the example below we are passing `separator` as keyword argument and this mea
 1?2?3?4?5?6?7?8?9?10
 >>> counter(1, 11, separator = ' - ')
 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10
+```
+In the example below we're passing all the arguments as the keyword or named argument (see how we've rearranged their order):
+
+```pycon
+>>> counter(separator = ' - ', end = 14, delta = 2, start = 1)
+1 - 3 - 5 - 7 - 9 - 11 - 13
 ```
 
 We can pass the keyword arguments in any order till we're passing them as **named** arguments:
@@ -321,5 +328,19 @@ TypeError: greet() missing 1 required keyword-only argument: 'greeting'
 
 > Works beyond Python 3.8
 
+There maybe a situation when we want all our arguments to be the positional only arguments. Consider the function definition below that is little weird.
+
+```pycon
+>>> def alphabets(start, stop=None):
+...     if stop is None:
+...             start, stop = 'a', start
+...     print(' '.join(chr(letter) for letter in range(ord(start), ord(stop))))
+... 
+>>> alphabets('f')
+a b c d e
+>>> alphabets('q', 'x')
+q r s t u v w
+>>> 
+```
 
 ## Accepting some keyword and some positional arguments
