@@ -326,7 +326,7 @@ TypeError: greet() missing 1 required keyword-only argument: 'greeting'
 
 ## Accepting Positional-only arguments
 
-> Works beyond Python 3.8
+> Works with and beyond Python 3.8
 
 There maybe a situation when we want all our arguments to be the positional only arguments. Consider the function definition below that is little weird.
 
@@ -343,4 +343,47 @@ q r s t u v w
 >>> 
 ```
 
+Now this `alphabets` function works in a manner that single argument is always considered as the stop argument, whereas when two arguments are passed the first argument is always the start and the second argument is always the stop argument.
+
+There is no point here to pass the arguments as the keyword arguments. We can modify the arguments to accept only the positonal arguments as follows
+
+```pycon
+>>> def alphabets(start, stop=None, /):
+...     if stop is None:
+...             start, stop = 'a', start
+...     print(' '.join(chr(letter) for letter in range(ord(start), ord(stop))))
+... 
+>>> alphabets(start='a', stop='b')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: alphabets() got some positional-only arguments passed as keyword arguments: 'start, stop'
+>>> alphabets('j')
+a b c d e f g h i
+```
+
+All the arguments before the `/` are treated as the positional argument.
+
 ## Accepting some keyword and some positional arguments
+
+We can have situation where we want some arguments to be passed positionally and some arguments to be passed as the keyword argument.
+
+```pycon
+>>> def alphabets(start, stop = None, *, sep = ' ', step = 1):
+...     if stop is None:
+...             start, stop = 'a', start
+...     print(sep.join(chr(letter) for letter in range(ord(start), ord(stop), step)))
+...
+>>> alphabets("t")
+a b c d e f g h i j k l m n o p q r s
+>>> alphabets("k","t")
+k l m n o p q r s
+>>> alphabets("k","t", step=2)
+k m o q s
+>>> alphabets("k","t", step=2, sep= ' - ')
+k - m - o - q - s
+>>> alphabets("k","t", 2, ' - ')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: alphabets() takes from 1 to 2 positional arguments but 4 were given
+```
+
