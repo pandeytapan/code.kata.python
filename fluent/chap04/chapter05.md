@@ -408,3 +408,21 @@ def clip(text: str, max_len: int = 80):
         end = len(text)
     return text[:end].rstrip()
 ```
+
+In the field of function introspection we have attributes builtin the function object that allow us to get details of the parameters. Two such attributes are:- `__defaults__` that returns the positional and keyword argument, `__kwdefaults__` that returns the details of the keyword only arguments:
+
+```python
+>>> from clip import clip
+>>> clip.__defaults__
+(80,)
+>>> from letterman import alphabets
+>>> alphabets.__defaults__
+(None,)
+>>> alphabets.__kwdefaults__
+{'step': 1, 'sep': ' '}
+```
+
+As we can see that `clip` does not have any keyword only argument but two positonal arguments. The `__defaults__` in this case returns a tuple that holds value for this positonal argument.
+
+When we check these argument for the `alphabets` we get values for tuple `__kwdefaults__`.
+
