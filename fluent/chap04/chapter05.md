@@ -409,7 +409,10 @@ def clip(text: str, max_len: int = 80):
     return text[:end].rstrip()
 ```
 
-In the field of function introspection we have attributes builtin the function object that allow us to get details of the parameters. Two such attributes are:- `__defaults__` that returns the positional and keyword argument, `__kwdefaults__` that returns the details of the keyword only arguments:
+In the field of function introspection we have attributes built in the function object that allow us to get details of the parameters. 
+Two such attributes are:- 
+- `__defaults__` that returns the positional and keyword argument.
+- `__kwdefaults__` that returns the details of the keyword only arguments.
 
 ```python
 >>> from clip import clip
@@ -426,3 +429,21 @@ As we can see that `clip` does not have any keyword only argument but two posito
 
 When we check these argument for the `alphabets` we get values for tuple `__kwdefaults__`.
 
+
+## The inspect module
+
+Python has a `inspect` module that allows digging into the live objects and checking them. One service it provides is checking the function signatures.
+Let us see how we can use it for the `clip` function
+
+```python
+>>> from clip import clip
+>>> from inspect import signature
+>>> sig = signature(clip)
+>>> str(sig)
+'(text: str, max_len: int = 80)'
+>>> for name, param in sig.parameters.items():
+...     print(param.kind, ':', name, '=', param.default)
+... 
+POSITIONAL_OR_KEYWORD : text = <class 'inspect._empty'>
+POSITIONAL_OR_KEYWORD : max_len = 80
+```
