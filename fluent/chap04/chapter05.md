@@ -447,3 +447,32 @@ Let us see how we can use it for the `clip` function
 POSITIONAL_OR_KEYWORD : text = <class 'inspect._empty'>
 POSITIONAL_OR_KEYWORD : max_len = 80
 ```
+
+
+## The function annotations
+
+Python3 allows attaching metadata to a function arguments and its return types also kown as type hints. Annotations are hints that are useful to understand the type of arguments the function will accept.
+
+Here is the annotated version of the `letterman.py`:
+
+```python
+
+def alphabets(start: int, stop: int = None, *, step: int = 1, sep: int = ' ') -> None:
+    '''prints a series of alphabets between a range'''
+
+    if stop is None:
+        start, stop = 'a', start
+
+    print(sep.join(chr(i) for i in range(ord(start), ord(stop), step)))
+```
+
+The annotation metadata comes after the argument and is separated by a colon. In case the argument takes a default value the annotation comes between argument and the `=` sign.
+
+The annotation are stored inside the `__annotations__` attribute of a function that is basically a dicitionary:
+
+```python
+>>> from letterman import alphabets
+>>> alphabets.__annotations__
+{'start': <class 'int'>, 'stop': <class 'int'>, 'step': <class 'int'>, 'sep': <class 'int'>, 'return': None}
+>>>
+```
