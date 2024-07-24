@@ -476,3 +476,16 @@ The annotation are stored inside the `__annotations__` attribute of a function t
 {'start': <class 'int'>, 'stop': <class 'int'>, 'step': <class 'int'>, 'sep': <class 'int'>, 'return': None}
 >>>
 ```
+
+
+## Functional programming recepies
+
+Although the Python is not written to be a funcitonal programming language but still it has many recepies in `operator` and `functools` that can be useful
+
+```python
+from functools import reduce
+
+
+def factorial(num: int) -> int:
+    return reduce(lambda a, b: a * b, range(1, num + 1))
+```
