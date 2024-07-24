@@ -1,0 +1,34 @@
+# requirements.txt
+# Core libraries for data manipulation and computation
+numpy>=1.21.0
+
+# Machine learning library
+scikit-learn>=0.24.0
+
+# Visualization libraries
+matplotlib>=3.4.0
+seaborn>=0.11.0
+
+# Generative models
+openai
+
+# other libraries
+python-dotenv>=0.17.0
+black>=21.6b0
+
+# Lazy loading of the json file
+ijson>=3.1.4
+
+# Linting
+flake8>=3.9.2
+# Virtual environment
+# name: ai.env
+# interpreter_path: /usr/bin/python3
+# requirements_path: requirements.txt
+# include_pip: true
+# include_setuptools: true
+# include_wheel: true
+# create_venv: true
+# pyenv activate python.env
+# pyenv deactivate
+
