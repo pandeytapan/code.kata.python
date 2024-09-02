@@ -51,3 +51,35 @@ This is foo...
 The inner function
 ```
 
+The docorator executes as soon as we assign the decorator to a variable, that's why we're seeing the lines:
+
+```bash
+Running the passed function inside the decorator
+This is foo...
+```
+
+However it returns the definition of the inner function and that doesn't gets executed but rather the address gets returned and assigned to the variable outside.
+
+In the example above the `decorate` is the decorator function and the `foo` is the decorated function.
+
+```python3
+>>> from code.registration import register
+registering <function f1 at 0x101dedee0> to registry
+registering <function f2 at 0x101dedf80> to registry
+>>> from code.registration import f1, f2, f3
+>>> f1()
+Running f1
+>>> f2()
+Running f2
+>>> f3()
+Running f3
+>>> from code.registration import registry
+>>> registry
+[<function f1 at 0x101dedee0>, <function f2 at 0x101dedf80>]
+>>> registry[0]
+<function f1 at 0x101dedee0>
+>>> registry[0]()
+Running f1
+>>> registry[1]()
+Running f2
+```
