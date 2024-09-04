@@ -62,6 +62,41 @@ However it returns the definition of the inner function and that doesn't gets ex
 
 In the example above the `decorate` is the decorator function and the `foo` is the decorated function.
 
+## When does Python executes a decorator
+
+Python executes a decorator as soon as the decorator is defined. For decorator this is usually the **import time**. In the code below we have:
+
+- Defined the function `registration` that is basically a decorator that appends the function address to the list `registry` and returns the decorated function that is basically the same as originally called function
+- Defined three functions i.e. `f1`, `f2` and `f3` out of which first two are decorated ones.
+- Whenever we are calling the decorator it initially prints what all functions it is decorating.
+
+```python
+# Example that shows difference between the runtime and the registration time
+# for a decorator.
+
+registry = []
+
+def register (funcptr):
+    print("registering %s to registry" % funcptr)
+    registry.append(funcptr)
+    return funcptr
+
+# Lets now decorate two functions
+
+@register
+def f1():
+    print("Running f1")
+
+@register
+def f2():
+    print("Running f2")
+
+def f3():
+    print("Running f3")
+```
+
+In the code below we are importing the `register`. As we import the register from the module we also apply it to the `f1` and `f2`. The register gets executed as soon as it is imported. That is why we see the lines `registering .... `  twice since we are decorating two functions.
+
 ```python3
 >>> from code.registration import register
 registering <function f1 at 0x101dedee0> to registry
