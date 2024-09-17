@@ -118,3 +118,10 @@ Running f1
 >>> registry[1]()
 Running f2
 ```
+
+Remember that most decorators do change the passed function, replacing it with a inner function. **Code that uses the inner function almost always depends upon the closures**. Let's see the how variable scope works to understand the closures.
+
+
+## Variable scope rules in Python
+
+
