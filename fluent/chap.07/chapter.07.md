@@ -123,5 +123,49 @@ Remember that most decorators do change the passed function, replacing it with a
 
 
 ## Variable scope rules in Python
+Consider the following function `f1` below. This function defines a local variable `a` that is passed as the parameter. It then prints the variable `a` and the vaiable `b` that is not defined anywhere in the program:
 
+```pycon
+>>> def f1(a):
+...     print(a)
+...     print(b)
+... 
+>>> f1(3)
+3
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in f1
+NameError: name 'b' is not defined
+```
 
+When trying to print the variable `b` we are getting `NameError` stating that `b` is not defined anywhere, either locally in the function or globally in the program.
+
+Now as a next step we defined `b` as a variable in the global namespace and called the function `f1` again:
+
+```pycon
+>>> b = 6
+>>> f1(3)
+3
+6
+```
+
+This time as anticipated we are getting the correct values for the `a` and `b`.
+
+```pycon
+>>> b = 12
+>>> def f2(a):
+...     print(a)
+...     print(b)
+...     b = 16
+... 
+```
+
+```pycon
+>>> f2(4)
+4
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in f2
+UnboundLocalError: cannot access local variable 'b' where it is not associated with a value
+>>> 
+```
