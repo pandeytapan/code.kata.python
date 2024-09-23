@@ -125,7 +125,7 @@ Remember that most decorators do change the passed function, replacing it with a
 ## Variable scope rules in Python
 Consider the following function `f1` below. This function defines a local variable `a` that is passed as the parameter. It then prints the variable `a` and the vaiable `b` that is not defined anywhere in the program:
 
-```pycon
+```python
 >>> def f1(a):
 ...     print(a)
 ...     print(b)
@@ -142,7 +142,7 @@ When trying to print the variable `b` we are getting `NameError` stating that `b
 
 Now as a next step we defined `b` as a variable in the global namespace and called the function `f1` again:
 
-```pycon
+```python
 >>> b = 6
 >>> f1(3)
 3
@@ -151,7 +151,10 @@ Now as a next step we defined `b` as a variable in the global namespace and call
 
 This time as anticipated we are getting the correct values for the `a` and `b`.
 
-```pycon
+Next, we've defined a function `f2` that first prints the value of `a`, `b` and further tries to assign a new value to the `b`.
+This function however doesn't passes beyond the first `print` statement:
+
+```python
 >>> b = 12
 >>> def f2(a):
 ...     print(a)
@@ -160,7 +163,9 @@ This time as anticipated we are getting the correct values for the `a` and `b`.
 ... 
 ```
 
-```pycon
+This happened because when Python compiled the body of the function `f2` it decided that `b` is a local variable rather than a global variable. Thus it tries to fetch the value of the `b` from within the local environment and dicovers that `b` is not defined it is unbound.
+
+```python
 >>> f2(4)
 4
 Traceback (most recent call last):
@@ -168,4 +173,33 @@ Traceback (most recent call last):
   File "<stdin>", line 3, in f2
 UnboundLocalError: cannot access local variable 'b' where it is not associated with a value
 >>> 
+```
+
+If we want the Python interpreter to treat the `b` as global variable inspite of the assignment in the function we can redefine the function with the `b` being prefixed with `global` keyword:
+
+```python
+>>> b = 9
+>>> def f2(a):
+...     global b
+...     print(a)
+...     print(b)
+...     b = 12
+```
+
+Now the execution of `f2` goes as desired:
+
+```python
+>>> f2(3)
+3
+9
+>>> b
+12
+>>> b = 14
+>>> b
+14
+>>> f2(1)
+1
+14
+>>> b
+12
 ```
