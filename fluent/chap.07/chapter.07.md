@@ -203,3 +203,9 @@ Now the execution of `f2` goes as desired:
 >>> b
 12
 ```
+
+## Closures
+
+Let us first see the example code below that computes the average value of a ever increasing series:
+
+
