@@ -208,4 +208,20 @@ Now the execution of `f2` goes as desired:
 
 Let us first see the example code below that computes the average value of a ever increasing series:
 
+```python
+class Averager():
+    def __init__(self):
+        self.series = []
 
+    def __call__(self, value):
+        self.series.append(value)
+        return sum(self.series)/len(self.series)
+```
+
+So in the code above we have created an attribute `series` that stores the number in the series and we have overloaded the dunder `__call__` to make it a callable.
+
+Now we're going to do the samething with a higher order function
+
+A higher-order function is a function that either takes one or more functions as arguments or returns a function as its result. 
+
+A closure is a function that captures the lexical scope in which it was created. This means that a closure remembers the environment where it was defined, even when it is executed outside that scope. Closures are often used in conjunction with higher-order functions.
