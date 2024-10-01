@@ -259,5 +259,21 @@ It is worth to understand how this time `avg` manages the series of the numbers.
 
 This time we have `series` defined and maintained as local variable of the function `make_averager`. Now when we are calling `avg`, we are actually calling the `averager` and `make_average` is already gone back. Comes question how we're accessing the `series` inside the `average`.
 
-Within the `averager` the `series` is known as the local variable i.e. a variable that is not bound to the local scope.
+Within the `averager` the `series` is known as the free variable i.e. a variable that is not bound to the local scope but is equally accessible in that scope.
+
+All the local and the free variables are kept under the `__code__` attribute that actually represents the compiled body of the function:
+
+```python
+>>> from average_closure import make_averager
+>>> avg = make_averager()
+>>> avg(10)
+10.0
+>>> avg.__code__.co_varnames
+('value',)
+>>> avg.__code__.co_freevars
+('series',)
+```
+
+So, closures have free variable, this means a set of variables that are out of scope for closure but are accessible within the closure. Closure retains the binding to the free variables that can be used later when the function has returned.
+
 
