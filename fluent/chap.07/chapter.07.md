@@ -220,8 +220,44 @@ class Averager():
 
 So in the code above we have created an attribute `series` that stores the number in the series and we have overloaded the dunder `__call__` to make it a callable.
 
-Now we're going to do the samething with a higher order function
+**Now we're going to do the same thing with a higher order function**
 
-A higher-order function is a function that either takes one or more functions as arguments or returns a function as its result. 
 
-A closure is a function that captures the lexical scope in which it was created. This means that a closure remembers the environment where it was defined, even when it is executed outside that scope. Closures are often used in conjunction with higher-order functions.
+A **higher-order function** is a function that either takes one or more functions as arguments or returns a function as its result. In that sense all the decorators that we've define are basically higher order function, as they take a function as an argument and return a function as a result.
+
+A **closure is a function** that *captures the lexical scope** in which it was created. This means that a closure remembers the environment where it was defined, even when it is executed outside that scope. Closures are often used in conjunction with higher-order functions.
+
+Now lets create the `Averager` using a functional approach:
+
+```python
+def make_averager():
+    series = []
+
+    def averager(value):
+        series.append(value)
+        return sum(series) / len(series)
+
+    return averager
+```
+
+The `averager` in the code above is returned back during the call to the `make_averager`. We can make use of the returned function `avg` just like the way we did in last example:
+
+```python
+>>> from average_closure import make_averager
+>>> avg = make_averager()
+>>> avg(10)
+10.0
+>>> avg(11)
+10.5
+>>> avg(12)
+11.0
+>>> avg(13)
+11.5
+```
+
+It is worth to understand how this time `avg` manages the series of the numbers. In the last example where we used the class we have `series` maintained as a attribute. 
+
+This time we have `series` defined and maintained as local variable of the function `make_averager`. Now when we are calling `avg`, we are actually calling the `averager` and `make_average` is already gone back. Comes question how we're accessing the `series` inside the `average`.
+
+Within the `averager` the `series` is known as the local variable i.e. a variable that is not bound to the local scope.
+
