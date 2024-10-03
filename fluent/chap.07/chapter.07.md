@@ -276,4 +276,57 @@ All the local and the free variables are kept under the `__code__` attribute tha
 
 So, closures have free variable, this means a set of variables that are out of scope for closure but are accessible within the closure. Closure retains the binding to the free variables that can be used later when the function has returned.
 
+We can make the code for the `averager` a bit better by removing the `series` list and instead keeping the sum and computing the average like this:
 
+```python
+def make_averager():
+    count = 0
+    total = 0
+
+    def averager(new_value):
+        total += new_value
+        count += 1
+        return total / count
+
+    return averager
+```
+
+And now we can call the function like this:
+
+```python
+>>> avg = make_averager()
+>>> avg(10)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+    total += new_value
+    ^^^^^
+UnboundLocalError: cannot access local variable 'total' where it is not associated with a value
+```
+
+So, again we're getting the `UnboundLocalError`, and this is because whenever we access the immutable values like integers, lists or the tuples this is considered as accessing a variable even before it is declared. This is equally same as accessing a global variable inside a function without even giving it the global declaration.
+
+we can correct the code as follows:
+
+```python
+def make_averager():
+    count = 0
+    total = 0
+
+    def averager(new_value):
+        nonlocal count, total
+        total += new_value
+        count += 1
+        return total / count
+
+    return averager
+```
+
+And now when we'll run the code we will get the result:
+
+```python
+>>> avg = make_averager()
+>>> avg(10)
+10.0
+>>> avg(11)
+10.5
+```
