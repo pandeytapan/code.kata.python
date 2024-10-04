@@ -330,3 +330,9 @@ And now when we'll run the code we will get the result:
 >>> avg(11)
 10.5
 ```
+
+## Creating a simple decorator in the Python
+
+So as per our last discussion we saw that closures are a way to bound veriables out of scope as well as returning an inner function that completely replaces the definiton of function to what it is assigned.
+
+- Remember that decorator takes a function as an argument and completely replaces it with a new function.
