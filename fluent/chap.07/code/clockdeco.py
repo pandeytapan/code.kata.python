@@ -1,17 +1,18 @@
 import time
 
+
 def clock(funcptr):
     '''
     The clock decorator calculates how much time it takes to execute a function
     @param funcptr: The decorated function
     '''
 
-    def clocked(**args):
+    def clocked(*args):
         '''
         Clocked is the inner function that is the replacement for the funcptr
         Arguments passed to the funcptr are actually captured in the clocked
         '''
-        
+
         t0 = time.perf_counter()
         result = funcptr(*args)
         t1 = time.perf_counter() - t0

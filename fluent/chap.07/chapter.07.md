@@ -336,3 +336,56 @@ And now when we'll run the code we will get the result:
 So as per our last discussion we saw that closures are a way to bound veriables out of scope as well as returning an inner function that completely replaces the definiton of function to what it is assigned.
 
 - Remember that decorator takes a function as an argument and completely replaces it with a new function.
+- Decorator basically follows the rule of the closure and relies on the free variable concept to get access to variables defined outside the scope.
+
+In the example below we've defined a decorator `clock` that basically shows how much time it took to execute a function:
+
+```python
+import time
+
+def clock(funcptr):
+    '''
+    The clock decorator calculates how much time it takes to execute a function
+    @param funcptr: The decorated function
+    '''
+
+    def clocked(**args):
+        '''
+        Clocked is the inner function that is the replacement for the funcptr
+        Arguments passed to the funcptr are actually captured in the clocked
+        '''
+        
+        t0 = time.perf_counter()
+        result = funcptr(*args)
+        t1 = time.perf_counter() - t0
+        name = funcptr.__name__
+        arg_str = ','.join(repr(arg) for arg in args)
+        print("[%0.8f] %s(%s) -> %r" % (t1, name, arg_str, result))
+
+        return result
+
+    return clocked
+```
+
+In the line `result = funcptr(*args)`, we're able to access the `args` only because closure is having access to the free variable.
+
+Here is the example below how we can use the `clocked`:
+
+```python
+>>> from clockdeco import clock
+>>>
+>>> @clock
+... def factorial(n: int) -> int:
+...     return 1 if n < 2 else n * factorial(n -1)
+...
+>>> factorial(6)
+[0.00000125] factorial(1) -> 1
+[0.00005714] factorial(2) -> 2
+[0.00007815] factorial(3) -> 6
+[0.00009683] factorial(4) -> 24
+[0.00011541] factorial(5) -> 120
+[0.00013862] factorial(6) -> 720
+720
+```
+
+This is typical behaviour of a decorator. It replaces the decorated function with a new definition. It however *usually* accepts the same arguments as passed to the original function and returns the same value as by original function. 
