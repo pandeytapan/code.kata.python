@@ -389,3 +389,5 @@ Here is the example below how we can use the `clocked`:
 ```
 
 This is typical behaviour of a decorator. It replaces the decorated function with a new definition. It however *usually* accepts the same arguments as passed to the original function and returns the same value as by original function. 
+
+This isto be deleted
