@@ -1,7 +1,7 @@
 import time
 
-from clockdeco import clocked
+from clockdeco import clock
 
 @clock
 def factorial (n: int) -> int:
-    return 1 if n < 2 else return n * factorial(n - 1)
+    return 1 if n < 2 else n * factorial(n - 1)

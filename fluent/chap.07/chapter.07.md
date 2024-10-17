@@ -390,4 +390,60 @@ Here is the example below how we can use the `clocked`:
 
 This is typical behaviour of a decorator. It replaces the decorated function with a new definition. It however *usually* accepts the same arguments as passed to the original function and returns the same value as by original function. 
 
-This is to be deleted
+There is however a problem with the decorator `clock` that we've written. It basically masks the `__name__` and `__doc__` attribute of the decorated function `factorial`:
+
+```python
+>>> factorial.__name__
+'clocked'
+>>> factorial.__doc__
+'\n        Clocked is the inner function that is the replacement for the funcptr\n        Arguments passed to the funcptr are actually captured in the clocked\n
+```
+
+## Using the `functools`
+
+The `functools` module of the standard library provides various tools for decorator writing. Using the `wraps` docorator we can easily handle the shortcomings in the last example. Here is the updated version of the `clock` decorator:
+
+```python
+import time
+import functools
+
+
+def clock(func):
+    @functools.wraps(func)
+    def clocked(*args, **kwargs):
+        t0 = time.time()
+        result = func(*args, **kwargs)
+        t1 = time.time() - t0
+        args_list = []
+        # If there are any args or kwargs we can add them into the display list
+        if args:
+            args_list.append(', '.join(repr(arg) for arg in args))
+        if kwargs:
+            pairs = [("%s=%s" % (k, v) for k, v in sorted(kwargs.items()))]
+            args_list.append(', '.join(pairs))
+        arg_str = ','.join(args_list)
+
+        print("[%0.8fs] %s -> %r" % (t1, arg_str, result))
+        return result
+    return clocked
+```
+
+This time when we run the program we will get the actual unmasked values:
+
+```python
+>>> @clock
+... def factorial(n):
+...     '''Returns the factorial of a given number'''
+...     return 1 if n < 2 else n * factorial (n - 1)
+...
+>>> factorial(4)
+[0.00000191s] 1 -> 1
+[0.00006700s] 2 -> 2
+[0.00008869s] 3 -> 6
+[0.00011492s] 4 -> 24
+24
+>>> factorial.__name__
+'factorial'
+>>> factorial.__doc__
+'Returns the factorial of a given number'
+```
