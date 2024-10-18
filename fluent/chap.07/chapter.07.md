@@ -447,3 +447,24 @@ This time when we run the program we will get the actual unmasked values:
 >>> factorial.__doc__
 'Returns the factorial of a given number'
 ```
+
+## More of the decorators in the standard library
+
+There are decorators in the standard libray that are helpful in crafting a program. These are `property`, `classmethod` and `staticmthod`. However lets now look at some of other decorators that are helpful.
+
+### Memoization with `@functools.lru_cache`
+
+This decorator implements the memoization that basically caches the result of the previous invocation of a precious function. This is quite helpful for and in case of the recursive functions.
+
+Here is the implementation of the `factorial` function with memoization support using the `lru_cache`:
+
+```python
+>>> import functools
+>>> @functools.lru_cache()
+... @clock
+... def factorial (n:int)->int:
+...     return 1 if n < 2 else n * factorial(n - 1)
+...
+```
+
+
